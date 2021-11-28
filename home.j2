@@ -1,0 +1,15 @@
+{% block body %}
+<div class="header">
+  <a class="logo" href="{{ linkify('/') }}">
+    {% if site.logo %}
+      <img src="{{ site.logo.src|thumbnail('s') }}" alt="{{ site.name }} logo">
+    {% endif %}
+    <strong>{{ site.name }}</strong>
+  </a>
+</div>
+<div class="header_cover">
+  {% if site.cover %}
+    <img src="{{ site.cover.src|thumbnail('l') }}" alt="{{ site.name }} banner cover">
+  {% endif %}
+</div>
+{% endblock %}
