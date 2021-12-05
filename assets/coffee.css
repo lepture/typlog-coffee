@@ -1,0 +1,226 @@
+:root {
+  --cjk-sans: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Droid Sans Fallback";
+  --sys-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial;
+  --text-hex: #3D3634;
+}
+
+body {
+  color: var(--text-hex);
+  background-color: #F8F7F6;
+  font: 18px/1.42 var(--sys-sans), var(--cjk-sans), sans-serif;
+}
+
+.site_head {
+  padding: 20px;
+}
+.site_logo {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+.site_logo img {
+  height: 48px;
+  vertical-align: middle;
+}
+
+.site_cover {
+  display: flex;
+  justify-content: center;
+}
+.site_cover img {
+  max-width: 1080px;
+  width: 100%;
+}
+
+.site_podcasts {
+  padding: 40px 40px 0;
+  text-align: center;
+}
+
+.site_podcasts a {
+  font-size: 24px;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.site_podcasts .icon {
+  color: var(--text-hex);
+  transition: color .2s ease;
+}
+.site_podcasts a:hover .icon-podcast {
+  color: #9933CC;
+}
+.site_podcasts a:hover .icon-castro {
+  color: #00B265;
+}
+.site_podcasts a:hover .icon-breaker {
+  color: #003DAD;
+}
+.site_podcasts a:hover .icon-google {
+  color: #4285F4;
+}
+.site_podcasts a:hover .icon-overcast {
+  color: #FC7E0F;
+}
+.site_podcasts a:hover .icon-pcast {
+  color: #F43E37;
+}
+.site_podcasts a:hover .icon-spotify {
+  color: #1DB954;
+}
+.site_podcasts a:hover .icon-xiaoyuzhou {
+  color: #23b5e1;
+}
+.site_podcasts a:hover .icon-163 {
+  color: #C20C0C;
+}
+.site_podcasts a:hover .icon-ximalaya {
+  color: #fa2800;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  max-width: 864px;
+  margin: 0 auto 20px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.item.featured {
+  max-width: 980px;
+}
+
+.item_image {
+  display: block;
+  flex-shrink: 0;
+  margin-right: 40px;
+  width: 192px;
+  height: fit-content;
+}
+
+.item_image img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.featured .item_image {
+  width: 240px;
+}
+
+.item_wrap {
+  overflow: hidden;
+}
+
+.item_label {
+  font: 500 12px/1.5 "IBM Plex Sans", sans-serif;
+  letter-spacing: 0.8px;
+  color: rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.featured .item_label {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: rgb(var(--rgb-primary));
+  color: rgb(var(--rgb-wb));
+}
+
+.item_label > span + span:before {
+  content: " | ";
+}
+
+.item_info h2 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.item_info h3 {
+  margin: 6px 0 0;
+  font-weight: 400;
+  font-size: 1.2em;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.item_info a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.item_info a:hover {
+  text-decoration: underline;
+}
+
+.item_summary {
+  margin-top: 24px;
+}
+
+.h-entry.featured {
+  margin-top: 60px;
+}
+
+.entry-head {
+  display: flex;
+  max-width: 980px;
+  margin: 0 auto 24px;
+}
+
+.entry-main {
+  max-width: 980px;
+  margin: 0 auto 20px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 60px 40px;
+  box-sizing: border-box;
+}
+
+.entry-main > .e-content {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.entry-audio {
+  margin-bottom: 34px;
+}
+.entry-audio .shk-player {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+
+.entry-speakers {
+  display: flex;
+  margin-top: 24px;
+}
+.entry-speakers a {
+  display: inline-block;
+}
+.entry-speakers .host {
+  margin-right: 2em;
+}
+.entry-speakers .author_type {
+  margin-bottom: 14px;
+}
+.entry-speakers strong {
+  border-bottom: 3px solid rgb(var(--rgb-primary));
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.entry-speakers img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+.entry-author a,
+.entry-authors a,
+.entry-speakers a {
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.entry-author a:hover,
+.entry-authors a:hover,
+.entry-speakers a:hover {
+  opacity: 0.8;
+}

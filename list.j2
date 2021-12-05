@@ -1,0 +1,30 @@
+{% from "macros.j2" import render_subject_authors %}
+
+{% block style %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ static_url }}assets/index.css">
+{% endblock %}
+
+{% block body %}
+<div class="header">
+  <a class="logo" href="{{ linkify('/') }}">
+    {% if site.logo %}
+      <img src="{{ site.logo.src|thumbnail('s') }}" alt="{{ site.name }} logo">
+    {% endif %}
+    <strong>{{ site.name }}</strong>
+  </a>
+</div>
+<div class="header_cover">
+  {% if site.cover %}
+    <img src="{{ site.cover.src|thumbnail('l') }}" alt="{{ site.name }} banner cover">
+  {% else %}
+    <img src="{{ static_url }}assets/banner.png" alt="{{ site.name }} banner cover">
+  {% endif %}
+</div>
+
+{% for item in page.items %}
+{% endfor %}
+
+{% endblock %}

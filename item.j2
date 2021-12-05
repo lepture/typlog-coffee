@@ -1,0 +1,54 @@
+{% from "macros.j2" import render_subject_content, render_subject_authors %}
+
+{% block style %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ static_url }}assets/coffee.css">
+{% endblock %}
+
+{% block body %}
+{% set podcast = site.podcast %}
+<div class="site">
+  <div class="site_head">
+    <a class="site_logo" href="{{ linkify('/') }}">
+      {% if podcast and podcast.image %}
+        <img src="{{ podcast.image|thumbnail('s') }}" alt="{{ podcast.title }} logo">
+      {% elif site.logo %}
+        <img src="{{ site.logo.src|thumbnail('s') }}" alt="{{ site.name }} logo">
+      {% endif %}
+      <strong>{{ site.name }}</strong>
+    </a>
+  </div>
+</div>
+
+<article class="h-entry featured">
+  <div class="entry-head">
+    {% if page.image %}
+      <div class="item_image">
+        <img src="{{ page.image|thumbnail('sm') }}" alt="{{ page.title }} image">
+      </div>
+    {% endif %}
+    <div class="entry-wrap item_info">
+      <div class="item_label">
+        {% if page.season and page.episode %}
+          <span>S{{ page.season }}E{{ page.episode }}</span>
+        {% elif page.episode %}
+          <span>E{{ page.episode }}</span>
+        {% endif %}
+        <span class="item_duration">{{ page.duration }}</span>
+      </div>
+      <h2 class="p-name">{{ page.title }}</h2>
+      {% if page.subtitle %}
+        <h3 class="p-summary">{{ page.subtitle }}</h3>
+      {% endif %}
+      {{ render_subject_authors(site, page) }}
+    </div>
+  </div>
+  <div class="entry-main">
+    <div class="e-content js-content {{ page.format }}">
+      {{ render_subject_content(site, page) }}
+    </div>
+  </div>
+</article>
+{% endblock %}

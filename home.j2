@@ -1,15 +1,115 @@
+{% from "macros.j2" import render_social_icons, render_subject_content %}
+
+{% block style %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ static_url }}assets/coffee.css">
+{% endblock %}
+
 {% block body %}
-<div class="header">
-  <a class="logo" href="{{ linkify('/') }}">
-    {% if site.logo %}
-      <img src="{{ site.logo.src|thumbnail('s') }}" alt="{{ site.name }} logo">
+{% set podcast = site.podcast %}
+<div class="site">
+  <div class="site_head">
+    <a class="site_logo" href="{{ linkify('/') }}">
+      {% if podcast and podcast.image %}
+        <img src="{{ podcast.image|thumbnail('s') }}" alt="{{ podcast.title }} logo">
+      {% elif site.logo %}
+        <img src="{{ site.logo.src|thumbnail('s') }}" alt="{{ site.name }} logo">
+      {% endif %}
+      <strong>{{ site.name }}</strong>
+    </a>
+    {% if site.nav_links %}
+      <div class="site_nav">
+        <label for="nav-links" aria-label="Navigation">
+          <i class="icon icon-menu"></i>
+        </label>
+        <input type="checkbox" id="nav-links" />
+        <nav>
+          {% for nav in site.nav_links %}
+            <a href="{{ nav.url }}" {% if nav.blank %} target="_blank"{% endif %}>{{ nav.title }}</a>
+          {% endfor %}
+        </nav>
+      </div>
     {% endif %}
-    <strong>{{ site.name }}</strong>
-  </a>
-</div>
-<div class="header_cover">
-  {% if site.cover %}
-    <img src="{{ site.cover.src|thumbnail('l') }}" alt="{{ site.name }} banner cover">
+  </div>
+  <div class="site_cover">
+    {% if site.cover %}
+      <img src="{{ site.cover.src|thumbnail('l') }}" alt="{{ site.name }} banner cover">
+    {% else %}
+      <img src="{{ static_url }}assets/banner.png" alt="{{ site.name }} banner cover">
+    {% endif %}
+  </div>
+  {% if podcast and podcast.links %}
+    <div class="site_podcasts">
+      {%- for nav in podcast.links -%}
+        <a href="{{ nav.url }}"{% if nav.blank %} target="_blank"{% endif %}>
+          <i class="icon icon-{{ nav.icon }}" aria-aria="{{ nav.title }}"></i>
+        </a>
+      {%- endfor -%}
+    </div>
   {% endif %}
 </div>
+
+{% set items = query.latest_subjects('audio', contains=['content']) %}
+{% if items %}
+  {% set latest = items[0] %}
+  <article class="h-entry item featured">
+    {% if latest.image %}
+      <a href="{{ linkify(latest.url)}}" class="item_image">
+        <img src="{{ latest.image|thumbnail('sm') }}" alt="{{ latest.title }} image">
+      </a>
+    {% endif %}
+    <div class="item_wrap">
+      <div class="item_label">
+        {% if latest.season and latest.episode %}
+          <span>S{{ latest.season }}E{{ latest.episode }}</span>
+        {% elif latest.episode %}
+          <span>E{{ latest.episode }}</span>
+        {% endif %}
+        <span class="item_duration">{{ latest.duration }}</span>
+      </div>
+      <div class="item_info">
+        <h2 class="p-name"><a href="{{ linkify(latest.url) }}">{{ latest.title }}</a></h2>
+        {% if latest.subtitle %}
+          <h3 class="p-summary">{{ latest.subtitle }}</h3>
+        {% endif %}
+      </div>
+      <div class="item_summary e-content js-content {{ latest.format }}">
+        {{ render_subject_content(site, latest) }}
+      </div>
+    </div>
+  </article>
+
+  {% for item in items[1:] %}
+    <div class="item">
+      {% if item.image %}
+        <a href="{{ linkify(item.url)}}" class="item_image">
+          <img src="{{ item.image|thumbnail('sm') }}" alt="{{ item.title }} image">
+        </a>
+      {% endif %}
+      <div class="item_wrap">
+        <div class="item_label">
+          {% if item.season and item.episode %}
+            <span>S{{ item.season }}E{{ item.episode }}</span>
+          {% elif item.episode %}
+            <span>E{{ item.episode }}</span>
+          {% endif %}
+          <span class="item_duration">{{ item.duration }}</span>
+        </div>
+        <div class="item_info">
+          <h2><a href="{{ linkify(item.url) }}">{{ item.title }}</a></h2>
+          {% if item.subtitle %}
+            <h3>{{ item.subtitle }}</h3>
+          {% endif %}
+        </div>
+        <div class="item_summary">{{ item.summary|escape }}</div>
+      </div>
+    </div>
+  {% endfor %}
+  <div class="site_more">
+    <a href="{{ linkify(site.list_url) }}">Get more</a>
+  </div>
+{% endif %}
+
 {% endblock %}
