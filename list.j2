@@ -1,30 +1,139 @@
-{% from "macros.j2" import render_subject_authors %}
+{% from "macros.j2" import render_navigation %}
 
 {% block style %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ static_url }}assets/index.css">
+<link rel="stylesheet" href="{{ static_url }}assets/coffee.css">
 {% endblock %}
 
 {% block body %}
-<div class="header">
-  <a class="logo" href="{{ linkify('/') }}">
-    {% if site.logo %}
-      <img src="{{ site.logo.src|thumbnail('s') }}" alt="{{ site.name }} logo">
+{% set podcast = site.podcast %}
+<div class="site">
+  <div class="site_head">
+    <a class="site_logo" href="{{ linkify('/') }}">
+      {% if podcast and podcast.image %}
+        <img src="{{ podcast.image|thumbnail('sm') }}" alt="{{ podcast.title }} logo">
+      {% elif site.logo %}
+        <img src="{{ site.logo.src|thumbnail('sm') }}" alt="{{ site.name }} logo">
+      {% endif %}
+      <strong>{{ site.name }}</strong>
+    </a>
+    {% if site.nav_links %}
+      <div class="site_nav">
+        <label for="nav-links" aria-label="Navigation">
+          <i class="icon icon-menu"></i>
+        </label>
+        <input type="checkbox" id="nav-links" />
+        <nav>
+          {% for nav in site.nav_links %}
+            <a href="{{ nav.url }}" {% if nav.blank %} target="_blank"{% endif %}>{{ nav.title }}</a>
+          {% endfor %}
+        </nav>
+        <a href="#" class="site_search js-search"
+          {% if features.algolia %}data-id="{{ site.algolia_id }}" data-key="{{ site.algolia_key }}"{% endif %}>
+          <i class="icon icon-search" aria-label="Search"></i>
+        </a>
+      </div>
     {% endif %}
-    <strong>{{ site.name }}</strong>
-  </a>
-</div>
-<div class="header_cover">
-  {% if site.cover %}
-    <img src="{{ site.cover.src|thumbnail('l') }}" alt="{{ site.name }} banner cover">
-  {% else %}
-    <img src="{{ static_url }}assets/banner.png" alt="{{ site.name }} banner cover">
+  </div>
+  {% if page.type == 'audio_list' %}
+    <div class="site_cover">
+      {% if site.cover %}
+        <img src="{{ site.cover.src|thumbnail('l') }}" alt="{{ site.name }} banner cover">
+      {% else %}
+        <img src="{{ static_url }}assets/banner.png" alt="{{ site.name }} banner cover">
+      {% endif %}
+    </div>
+    {% if podcast and podcast.links %}
+      <div class="site_podcasts">
+        {%- for nav in podcast.links -%}
+          <a href="{{ nav.url }}"{% if nav.blank %} target="_blank"{% endif %}>
+            <i class="icon icon-{{ nav.icon }}" aria-aria="{{ nav.title }}"></i>
+          </a>
+        {%- endfor -%}
+      </div>
+    {% endif %}
   {% endif %}
 </div>
 
+{% if page.type == 'author' %}
+<div class="list-head">
+{% set user = page.topic %}
+<div class="entry-authors list-head_inner">
+  <div class="p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    {% if user.avatar %}
+      <a href="{{ linkify(user.url) }}" class="author_image">
+        <img class="u-photo" itemprop="image" src="{{ user.avatar|thumbnail('ss') }}" alt="{{ user.name }}">
+      </a>
+    {% endif %}
+    <div class="author_main">
+      <div class="author_meta">
+        <strong class="p-name" itemprop="name">
+          <a href="{{ linkify(user.url) }}" class="u-url">{{ user.name }}</a>
+        </strong>
+        {% if user.metadata.twitter %}
+          <a href="https://twitter.com/{{ user.metadata.twitter }}">
+            <i class="icon icon-twitter" aria-label="Twitter"></i>
+          </a>
+        {% endif %}
+      </div>
+      {% if user.bio %}
+        <div class="author_bio" itemprop="description">{{ user.bio }}</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</div>
+{% elif page.type == 'tag' %}
+{% set tag = page.topic %}
+<div class="list-head">
+  <div class="list-head_inner item_info">
+    <h2>{{ tag.title }}</h2>
+    {% if tag.summary %}
+      <h3>{{ tag.summary }}</h3>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
 {% for item in page.items %}
+  <div class="item">
+    {% if item.image %}
+      <a href="{{ linkify(item.url)}}" class="item_image">
+        <img src="{{ item.image|thumbnail('sm') }}" alt="{{ item.title }} image">
+      </a>
+    {% endif %}
+    <div class="item_wrap">
+      <div class="item_meta">
+        {% if item.type == 'audio' %}
+          <div class="item_label">
+            {% if item.season and item.episode %}
+              <span>S{{ item.season }}E{{ item.episode }}</span>
+            {% elif item.episode %}
+              <span>E{{ item.episode }}</span>
+            {% endif %}
+            <span class="item_duration">{{ item.duration }}</span>
+          </div>
+        {% endif %}
+        <div class="item_time">
+          <time datetime="{{ item.published_at|xmldatetime }}">{{ item.published_at.strftime('%Y-%m-%d') }}</time>
+        </div>
+      </div>
+      <div class="item_info">
+        <h2><a href="{{ linkify(item.url) }}">{{ item.title }}</a></h2>
+        {% if item.subtitle %}
+          <h3>{{ item.subtitle }}</h3>
+        {% endif %}
+      </div>
+      <div class="item_summary">{{ item.summary|escape }}</div>
+    </div>
+  </div>
 {% endfor %}
 
+{{ render_navigation(site, page) }}
+
+<div class="foot">
+  <p>Powered by <a href="https://typlog.com/">Typlog</a>. Theme <a href="https://github.com/lepture/typlog-coffee">coffee</a> created by <a href="https://lepture.com/">lepture</a>.</p>
+</div>
 {% endblock %}

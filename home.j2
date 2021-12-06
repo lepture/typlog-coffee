@@ -13,9 +13,9 @@
   <div class="site_head">
     <a class="site_logo" href="{{ linkify('/') }}">
       {% if podcast and podcast.image %}
-        <img src="{{ podcast.image|thumbnail('s') }}" alt="{{ podcast.title }} logo">
+        <img src="{{ podcast.image|thumbnail('sm') }}" alt="{{ podcast.title }} logo">
       {% elif site.logo %}
-        <img src="{{ site.logo.src|thumbnail('s') }}" alt="{{ site.name }} logo">
+        <img src="{{ site.logo.src|thumbnail('sm') }}" alt="{{ site.name }} logo">
       {% endif %}
       <strong>{{ site.name }}</strong>
     </a>
@@ -30,6 +30,10 @@
             <a href="{{ nav.url }}" {% if nav.blank %} target="_blank"{% endif %}>{{ nav.title }}</a>
           {% endfor %}
         </nav>
+        <a href="#" class="site_search js-search"
+          {% if features.algolia %}data-id="{{ site.algolia_id }}" data-key="{{ site.algolia_key }}"{% endif %}>
+          <i class="icon icon-search" aria-label="Search"></i>
+        </a>
       </div>
     {% endif %}
   </div>
@@ -61,13 +65,18 @@
       </a>
     {% endif %}
     <div class="item_wrap">
-      <div class="item_label">
-        {% if latest.season and latest.episode %}
-          <span>S{{ latest.season }}E{{ latest.episode }}</span>
-        {% elif latest.episode %}
-          <span>E{{ latest.episode }}</span>
-        {% endif %}
-        <span class="item_duration">{{ latest.duration }}</span>
+      <div class="item_meta">
+        <div class="item_label">
+          {% if latest.season and latest.episode %}
+            <span>S{{ latest.season }}E{{ latest.episode }}</span>
+          {% elif latest.episode %}
+            <span>E{{ latest.episode }}</span>
+          {% endif %}
+          <span class="item_duration">{{ latest.duration }}</span>
+        </div>
+        <div class="item_time">
+          <time datetime="{{ latest.published_at|xmldatetime }}">{{ latest.published_at.strftime('%Y-%m-%d') }}</time>
+        </div>
       </div>
       <div class="item_info">
         <h2 class="p-name"><a href="{{ linkify(latest.url) }}">{{ latest.title }}</a></h2>
@@ -89,13 +98,18 @@
         </a>
       {% endif %}
       <div class="item_wrap">
-        <div class="item_label">
-          {% if item.season and item.episode %}
-            <span>S{{ item.season }}E{{ item.episode }}</span>
-          {% elif item.episode %}
-            <span>E{{ item.episode }}</span>
-          {% endif %}
-          <span class="item_duration">{{ item.duration }}</span>
+        <div class="item_meta">
+          <div class="item_label">
+            {% if item.season and item.episode %}
+              <span>S{{ item.season }}E{{ item.episode }}</span>
+            {% elif item.episode %}
+              <span>E{{ item.episode }}</span>
+            {% endif %}
+            <span class="item_duration">{{ item.duration }}</span>
+          </div>
+          <div class="item_time">
+            <time datetime="{{ item.published_at|xmldatetime }}">{{ item.published_at.strftime('%Y-%m-%d') }}</time>
+          </div>
         </div>
         <div class="item_info">
           <h2><a href="{{ linkify(item.url) }}">{{ item.title }}</a></h2>
@@ -107,9 +121,12 @@
       </div>
     </div>
   {% endfor %}
-  <div class="site_more">
-    <a href="{{ linkify(site.list_url) }}">Get more</a>
+  <div class="navigation">
+    <a href="{{ linkify(site.audios_url) }}">Get more</a>
   </div>
 {% endif %}
 
+<div class="foot">
+  <p>Powered by <a href="https://typlog.com/">Typlog</a>. Theme <a href="https://github.com/lepture/typlog-coffee">coffee</a> created by <a href="https://lepture.com/">lepture</a>.</p>
+</div>
 {% endblock %}
