@@ -1,5 +1,37 @@
 {
   "name": "coffee",
+  "name#zh": "咖啡",
+  "name#ja": "カフェ",
   "description": "A podcast theme designed by uxcoffee.",
-  "version": "0.1.0"
+  "repo": "lepture/typlog-coffee",
+  "version": "0.1.0",
+  "author": "Hsiaoming Yang",
+  "images": [
+    "https://user-images.githubusercontent.com/290496/144819329-d42a0cd7-2b90-439b-85e8-d74783a51d4a.png",
+    "https://user-images.githubusercontent.com/290496/144819322-415c9567-678d-410a-8a19-a529d06f8a4c.png",
+    "https://user-images.githubusercontent.com/290496/144819338-f57c5259-94c5-4cf7-a162-d2a906a2ecb4.png"
+  ],
+  "donate": "https://lepture.com/donate",
+  "site": {
+    "id": 3010,
+    "name": "Coffee",
+    "nav_links": [
+      {
+        "title": "By tag",
+        "url": "/topic/design/"
+      },
+      {
+        "title": "By host",
+        "url": "/by/cat/"
+      },
+      {
+        "title": "Elements",
+        "url": "/posts/elements"
+      },
+      {
+        "title": "Get theme",
+        "url": "https://github.com/lepture/typlog-coffee"
+      }
+    ]
+  }
 }
