@@ -76,7 +76,24 @@
     <div class="e-content js-content {{ page.format }}">
       {{ render_subject_content(site, page) }}
     </div>
+    <div class="entry-foot">
+      <div class="enjoy">
+        <button class="button js-enjoy">Like</button>
+      </div>
+    </div>
   </div>
+
+  {% if features.comment and page.comment != 'disabled' %}
+  <section class="entry-section comment">
+    <div class="inner">
+      {% if site.disqus %}
+        <div id="disqus_thread" data-shortname="{{ site.disqus }}"></div>
+      {% else %}
+        <div id="comment_thread"></div>
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
 </article>
 
 <div class="foot">

@@ -226,6 +226,7 @@ a:hover {
   text-align: center;
 }
 
+.enjoy button,
 .navigation a {
   display: inline-block;
   padding: 8px 16px;
@@ -235,6 +236,26 @@ a:hover {
   color: rgb(var(--rgb-wb));
   background-color: rgb(var(--rgb-primary));
   text-decoration: none;
+}
+
+.entry-foot {
+  text-align: center;
+  padding-bottom: 34px;
+}
+.enjoy button {
+  border: 3px solid rgb(var(--rgb-primary));
+  background: white;
+  color:rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+}
+.enjoy button:disabled {
+  cursor: not-allowed;
+  color: rgb(var(--rgb-wb));
+  background-color: rgb(var(--rgb-primary));
+}
+.enjoy button > i {
+  margin-left: 4px;
+  font-style: normal;
 }
 
 .navigation a:hover {
@@ -263,12 +284,17 @@ a:hover {
   margin: 0 auto 24px;
 }
 
+.entry-section,
 .entry-main {
   max-width: 980px;
   margin: 0 auto 20px;
   background: #fff;
   border-radius: 8px;
   box-sizing: border-box;
+}
+
+.entry-section > .inner {
+  padding: 40px;
 }
 
 .entry-main > .e-content {
@@ -280,6 +306,23 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
   box-sizing: content-box;
+}
+
+.e-content blockquote {
+  position: relative;
+  padding: 0.4em 0 0 2.2em;
+  margin: 2em 0;
+  font-size: 0.96em;
+  border: 0;
+}
+
+.e-content blockquote:before {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  content: "\201c";
+  font: bold 62px/1 "Droid Serif", serif;
+  color: rgba(0, 0, 0, 0.1);
 }
 
 .e-content hr {
@@ -329,7 +372,6 @@ a:hover {
 .entry-audio .shk-player {
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 
 .entry-authors .p-author {
   display: flex;
