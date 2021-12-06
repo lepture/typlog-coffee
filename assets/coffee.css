@@ -68,6 +68,7 @@ a:hover {
   font-size: 14px;
   opacity: 0.86;
   text-decoration: none;
+  white-space: nowrap;
 }
 .site_nav nav > a:hover {
   text-decoration: underline;
@@ -471,5 +472,9 @@ a:hover {
   .entry-main .e-content > * {
     padding-left: 16px;
     padding-right: 16px;
+  }
+  .entry-main .e-content > .block-table {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
