@@ -40,6 +40,7 @@ a:hover {
   color: inherit;
 }
 .site_logo:hover {
+  color: inherit;
   text-decoration: none;
 }
 .site_logo img {
@@ -306,6 +307,15 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
   box-sizing: content-box;
+}
+
+.e-content {
+  line-height: 1.62;
+}
+
+.e-content a:hover {
+  color: inherit;
+  background-color: rgba(var(--rgb-primary), 0.4);
 }
 
 .e-content blockquote {
