@@ -15,7 +15,7 @@
   "site": {
     "id": 3010,
     "name": "Coffee",
-    "nav_links": [
+    "primary_links": [
       {
         "title": "By tag",
         "url": "/topic/design/"
