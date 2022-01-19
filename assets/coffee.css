@@ -21,7 +21,7 @@ a {
   text-rendering: optimizeLegibility;
 }
 a:hover {
-  color: rgb(var(--rgb-primary));
+  color: var(--primary-color-hex);
   text-decoration: underline;
 }
 
@@ -178,6 +178,7 @@ a:hover {
   font: 500 12px/1.5 "IBM Plex Sans", sans-serif;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 18px;
   color: rgba(0, 0, 0, 0.5);
 }
@@ -190,8 +191,8 @@ a:hover {
 .featured .item_label {
   display: inline-block;
   padding: 6px 12px;
-  background-color: rgb(var(--rgb-primary));
-  color: rgb(var(--rgb-wb));
+  background-color: var(--primary-color-hex);
+  color: rgb(var(--primary-text-rgb));
 }
 
 .item_label > span + span:before {
@@ -220,6 +221,7 @@ a:hover {
 }
 
 .item_summary {
+  line-height: 1.7;
   margin-top: 24px;
 }
 
@@ -234,8 +236,8 @@ a:hover {
   font: 600 14px/1.5 "IBM Plex Sans", sans-serif;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: rgb(var(--rgb-wb));
-  background-color: rgb(var(--rgb-primary));
+  color: rgb(var(--primary-text-rgb));
+  background-color: rgb(var(--primary-color-rgb));
   text-decoration: none;
 }
 
@@ -244,15 +246,15 @@ a:hover {
   padding-bottom: 34px;
 }
 .enjoy button {
-  border: 3px solid rgb(var(--rgb-primary));
+  border: 3px solid rgb(var(--primary-color-rgb));
   background: white;
   color:rgba(0, 0, 0, 0.85);
   cursor: pointer;
 }
 .enjoy button:disabled {
   cursor: not-allowed;
-  color: rgb(var(--rgb-wb));
-  background-color: rgb(var(--rgb-primary));
+  color: rgb(var(--primary-text-rgb));
+  background-color: rgb(var(--primary-color-rgb));
 }
 .enjoy button > i {
   margin-left: 4px;
@@ -260,7 +262,7 @@ a:hover {
 }
 
 .navigation a:hover {
-  color: rgb(var(--rgb-wb));
+  color: rgb(var(--primary-text-rgb));
   opacity: 0.8;
   text-decoration: none;
 }
@@ -310,12 +312,12 @@ a:hover {
 }
 
 .e-content {
-  line-height: 1.62;
+  line-height: 1.7;
 }
 
 .e-content a:hover {
   color: inherit;
-  background-color: rgba(var(--rgb-primary), 0.4);
+  background-color: rgba(var(--primary-color-rgb), 0.4);
 }
 
 .e-content blockquote {
@@ -362,7 +364,7 @@ a:hover {
 
 .block-table th {
   color: rgba(0, 0, 0, 0.85);
-  background-color: rgba(var(--rgb-primary), 0.04);
+  background-color: rgba(var(--primary-color-rgb), 0.04);
 }
 
 .block-table td {
@@ -370,7 +372,7 @@ a:hover {
 }
 
 .block-table tr:nth-child(even) {
-  background-color: rgba(var(--rgb-primary), 0.02);
+  background-color: rgba(var(--primary-color-rgb), 0.02);
 }
 .block-table tbody tr:last-child td {
   border-bottom: 0;
@@ -432,7 +434,7 @@ a:hover {
   margin-bottom: 14px;
 }
 .entry-speakers strong {
-  border-bottom: 3px solid rgb(var(--rgb-primary));
+  border-bottom: 3px solid rgb(var(--primary-color-rgb));
   font-size: 14px;
   text-transform: uppercase;
 }
