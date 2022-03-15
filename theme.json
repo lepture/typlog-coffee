@@ -1,7 +1,7 @@
 {
   "name": "coffee",
   "name#zh": "咖啡",
-  "name#ja": "カフェ",
+  "name#ja": "コーヒー",
   "description": "A podcast theme designed by uxcoffee.",
   "repo": "lepture/typlog-coffee",
   "version": "0.3.1",
