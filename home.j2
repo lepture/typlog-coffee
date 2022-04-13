@@ -121,9 +121,11 @@
       </div>
     </div>
   {% endfor %}
-  <div class="navigation">
-    <a href="{{ linkify(site.audios_url) }}">Get more</a>
-  </div>
+  {% if site.audios_url %}
+    <div class="navigation">
+      <a href="{{ linkify(site.audios_url) }}">Get more</a>
+    </div>
+  {% endif %}
 {% endif %}
 
 <div class="foot">
